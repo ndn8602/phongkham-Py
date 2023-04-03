@@ -1,12 +1,13 @@
 # phongkham-Py
 
-**Các bước để chạy (đối với vscode):**
+
 
 **Cài mongodb:**
 1.  Cài mongodb (https://www.mongodb.com/try/download/community) (Có tùy chọn cài mặc định mongodb compass giống myphpadmin)
-2.  Mở mongodb compass
+2.  Mở mongodb compass (Nếu cần)
 3.  Import database (Nếu có)
 
+**Các bước để chạy (đối với vscode):**
 1.  Mở project với vscode
 2.  Mở Terminal
 3.  Chạy script **activate** trong thư mục **venv/bin**
