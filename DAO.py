@@ -4,6 +4,7 @@ myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["phongkham"]
 dbPatient = mydb["patient"]
 dbDoctor = mydb["doctor"]
+dbAdmin = mydb["admin"]
 
 #create Chema
 
@@ -29,12 +30,15 @@ doctor={
     'room':'Heart',
     'phone':'012343645654', #length:10
     'email':'example@gmail.com',
-    'password':'123admin', # can use bcrypto to hash password
     'degree':'ABCDS University'
+}
+admin={
+    'name':'admin',
+    'email':'admin@localhost',
+    'password':'admin', # can use bcrypto to hash password
 }
 
 #handle here
-
 def addNewDoctor():
     dbDoctor.insert_one(doctor)
 
@@ -47,8 +51,11 @@ def deleteDoctor():
 def addPatient():
     dbPatient.insert_one(patient)
 
+def addAdmin():
+    dbAdmin.insert_one(admin)
 
 #test
 
 addNewDoctor()
 addPatient()
+addAdmin()
