@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,jsonify
 from chat import get_response
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -8,6 +9,7 @@ def index():
 
 @app.route('/admin/')
 def adminLogin():
+    
     return render_template('admin/login.html' ,title='Admin Login')
 
 @app.route('/admin/register')
@@ -26,4 +28,4 @@ def predict():
     return jsonify(message)
 
 if __name__ == "__main__":
-    app.run()   
+    app.run()
