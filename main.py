@@ -8,24 +8,30 @@ app = Flask(__name__)
 def index():
     return render_template('user/index.html')
 
-@app.route('/admin/')
+@app.route('/admin', methods = ['GET', 'POST'])
 def adminLogin():
-    return render_template('admin/login.html' ,title='Admin Login')    
+    if request.method == 'GET':
+        return render_template('admin/login.html' ,title='Admin Login')
+
+    email = request.form['exampleInputEmail']
+    password = request.form['exampleInputPassword']   
+    
+    if DAO.loginAdmin(email, password) == False:
+        return render_template('/admin/login.html',title='Admin Login',error='true')
+    return redirect("/admin/home")
 
 @app.route('/admin/register', methods = ['POST', 'GET'])
 def register():
     if request.method == 'GET':
         return render_template('admin/register.html' ,title='Admin Register')
-    else:
-        name = request.form['exampleFullName']
-        email = request.form['exampleInputEmail']
-        password = request.form['exampleInputPassword']
-        
-        if DAO.dbAdmin.count_documents({'email': email}) != 0:
-            return render_template('admin/register.html' ,title='Admin Register',error='true')
-        
-        DAO.addAdmin(name, email, password)
-        return redirect("/admin")
+    
+    name = request.form['exampleFullName']
+    email = request.form['exampleInputEmail']
+    password = request.form['exampleInputPassword']
+    
+    if DAO.addAdmin(name, email, password) == False:
+        return render_template('admin/register.html' ,title='Admin Register',error='true')
+    return redirect("/admin")
 
 @app.route('/admin/home')
 def adminHome():

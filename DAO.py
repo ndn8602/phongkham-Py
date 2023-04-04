@@ -58,8 +58,15 @@ def addAdmin(name, email, password):
         'email': email,
         'password': password, # can use bcrypto to hash password
     }
-    print(admin)
+    if dbAdmin.count_documents({'email': email}) != 0:
+        return False
     dbAdmin.insert_one(admin)
+    return True
+
+def loginAdmin(email, password):
+    if dbAdmin.count_documents({'email': email, 'password': password}) == 0:
+        return False
+    return True
 
 #test
 
