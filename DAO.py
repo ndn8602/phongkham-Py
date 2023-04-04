@@ -32,11 +32,12 @@ doctor={
     'email':'example@gmail.com',
     'degree':'ABCDS University'
 }
-admin={
-    'name':'admin',
-    'email':'admin@localhost',
-    'password':'admin', # can use bcrypto to hash password
-}
+
+# admin={
+#     'name':'root',
+#     'email': 'nomail@no',
+#     'password': 'root', # can use bcrypto to hash password
+# }
 
 #handle here
 def addNewDoctor():
@@ -51,11 +52,17 @@ def deleteDoctor():
 def addPatient():
     dbPatient.insert_one(patient)
 
-def addAdmin():
+def addAdmin(name, email, password):
+    admin={
+        'name': name,
+        'email': email,
+        'password': password, # can use bcrypto to hash password
+    }
+    print(admin)
     dbAdmin.insert_one(admin)
 
 #test
 
 addNewDoctor()
 addPatient()
-addAdmin()
+# addAdmin()

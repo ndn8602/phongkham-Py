@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,jsonify,redirect,url_for
 from chat import get_response
+import DAO
 
 app = Flask(__name__)
 
@@ -9,19 +10,22 @@ def index():
 
 @app.route('/admin/')
 def adminLogin():
-    return render_template('admin/login.html' ,title='Admin Login')
+    return render_template('admin/login.html' ,title='Admin Login')    
 
-@app.post('/admin/register/createadmin')
-def addAdmin():
-    name = request.form['exampleFullName']
-    
-    if name == 'err':
-        return render_template('admin/register.html' ,title='Admin Register',error='true')
-    return redirect("/admin")
-
-@app.route('/admin/register/')
+@app.route('/admin/register', methods = ['POST', 'GET'])
 def register():
-    return render_template('admin/register.html' ,title='Admin Register')
+    if request.method == 'GET':
+        return render_template('admin/register.html' ,title='Admin Register')
+    else:
+        name = request.form['exampleFullName']
+        email = request.form['exampleInputEmail']
+        password = request.form['exampleInputPassword']
+        
+        if DAO.dbAdmin.count_documents({'email': email}) != 0:
+            return render_template('admin/register.html' ,title='Admin Register',error='true')
+        
+        DAO.addAdmin(name, email, password)
+        return redirect("/admin")
 
 @app.route('/admin/home')
 def adminHome():
