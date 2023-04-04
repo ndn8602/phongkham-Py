@@ -14,7 +14,7 @@ def adminLogin():
         return render_template('admin/login.html' ,title='Admin Login')
 
     email = request.form['exampleInputEmail']
-    password = request.form['exampleInputPassword']   
+    password = request.form['exampleInputPassword']
     
     if DAO.loginAdmin(email, password) == False:
         return render_template('/admin/login.html',title='Admin Login',error='true')
