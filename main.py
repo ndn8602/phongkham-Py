@@ -11,10 +11,13 @@ def index():
 def adminLogin():
     return render_template('admin/login.html' ,title='Admin Login')
 
-@app.route('/admin/register/createadmin')
+@app.post('/admin/register/createadmin')
 def addAdmin():
-    redirect(url_for("/admin"))
-    return None
+    name = request.form['exampleFullName']
+    
+    if name == 'err':
+        return render_template('admin/register.html' ,title='Admin Register',error='true')
+    return redirect("/admin")
 
 @app.route('/admin/register/')
 def register():
