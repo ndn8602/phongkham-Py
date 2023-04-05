@@ -363,9 +363,6 @@
                                 <th scope="col">Degree</th>
                             </tr>
                         </thead>
-
-
-
                         <tbody>
                             {% for doctor in doctors %}
                             <tr class="row-doctor" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -381,7 +378,30 @@
                             </tr>
                             {% endfor %}
                         </tbody>
+                        <script>
+                            const rows = document.querySelectorAll('.row-doctor');
+
+                            rows.forEach(row => {
+                                row.addEventListener('click', function (event) {
+                                    // Truy xuất thông tin về dòng được nhấp vào
+                                    console.dir(event.currentTarget);
+                                    currentDoctor = event.currentTarget
+                                    // console.dir(currentDoctor.children[1])
+
+                                    document.getElementById("infoDoctorId").value = currentDoctor.children[1].innerHTML
+                                    document.getElementById("infoDoctorName").value = currentDoctor.children[2].innerHTML
+                                    document.getElementById("infoDoctorOld").value = currentDoctor.children[3].innerHTML
+                                    document.getElementById("infoDoctorGender").value = currentDoctor.children[4].innerHTML
+                                    document.getElementById("infoDoctorRoom").value = currentDoctor.children[5].innerHTML
+                                    document.getElementById("infoDoctorPhone").value = currentDoctor.children[6].innerHTML
+                                    document.getElementById("infoDoctorEmail").value = currentDoctor.children[7].innerHTML
+                                    document.getElementById("infoDoctorDegree").value = currentDoctor.children[8].innerHTML
+
+                                });
+                            });
+                        </script>
                     </table>
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -390,12 +410,12 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Docter</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Doctor</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form class="doctor" method="POST" action="/admin/doctor/update">
                                     <div class="mb-3">
                                         <label for="infoDoctorName" class="form-label">Name</label>
                                         <input type="text" name="name" class="form-control" id="infoDoctorName"
@@ -406,11 +426,16 @@
                                         <input type="text" name="old" class="form-control" id="infoDoctorOld">
                                     </div>
                                     <div class="mb-3">
-                                        <select class="form-select" name="gender" aria-label="Default select example">
+                                        <select class="form-select" name="gender" id="infoDoctorGender"
+                                            aria-label="Default select example">
                                             <option selected>Gender</option>
                                             <option value="male">male</option>
                                             <option value="female">female</option>
                                         </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="infoDoctorRoom" class="form-label">Room</label>
+                                        <input type="text" name="room" class="form-control" id="infoDoctorRoom">
                                     </div>
                                     <div class="mb-3">
                                         <label for="infoDoctorPhone" class="form-label">Phone</label>
@@ -424,12 +449,16 @@
                                         <label for="infoDoctorDegree" class="form-label">Degree</label>
                                         <input type="text" name="degree" class="form-control" id="infoDoctorDegree">
                                     </div>
+                                    <input type="hidden" name="id" class="form-control" id="infoDoctorId">
+
+                                    <button type="submit" name="update" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Update</button>
+                                    <button type="submit" name="remove" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Remove</button>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Remove</button>
                             </div>
                         </div>
                     </div>

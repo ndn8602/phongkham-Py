@@ -38,6 +38,24 @@ def adminDoctor():
     doctors = DAO.getDoctors()
     return render_template('admin/admin_doctor.html',title='Admin Doctor', doctors=doctors)
 
+@app.route('/admin/doctor/update', methods = ['POST'])
+def adminUpdateDoctor():
+    doctor_id = request.form['id']
+    name = request.form['name']
+    old = request.form['old']
+    gender = request.form['gender']
+    room = request.form['room']
+    phone = request.form['phone']
+    email = request.form['email']
+    degree = request.form['degree']
+
+    # DAO.updateDoctor(doctor_id,name,old)
+    print(name,old,doctor_id,gender,room,phone,email,degree)
+
+    doctors = DAO.getDoctors()
+    return render_template('admin/admin_doctor.html',title='Admin Doctor', doctors=doctors)
+
+
 @app.route('/admin/home')
 def adminHome():
     return render_template('admin/index.html',title='Admin Home')

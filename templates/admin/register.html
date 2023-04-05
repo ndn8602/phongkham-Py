@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -14,32 +15,36 @@
                         <div class="p-5">
                             <div class="text-center">
                                 {% if error == "true" %}
-                                    <h1 class="h4 text-gray-900 mb-4">User already created, try again!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">User already created, try again!</h1>
                                 {% endif %}
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" method="POST" action="/admin/register" oninput='exampleInputPassword.setCustomValidity(exampleInputPassword.value != exampleInputRepeatPassword.value ? "Passwords do not match." : "")'>
+                            <form class="user" method="POST" action="/admin/register"
+                                oninput='exampleInputPassword.setCustomValidity(exampleInputPassword.value != exampleInputRepeatPassword.value ? "Passwords do not match." : "")'>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFullName" name="exampleFullName"
-                                            placeholder="Full Name">
+                                        <input type="text" class="form-control form-control-user" id="exampleFullName"
+                                            name="exampleFullName" placeholder="Full Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                        name="exampleInputEmail" placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" name="exampleInputPassword"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user"
+                                            name="exampleInputPassword" id="exampleInputPassword"
+                                            placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" name="exampleInputRepeatPassword">
+                                            id="exampleRepeatPassword" placeholder="Repeat Password"
+                                            name="exampleInputRepeatPassword">
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
+                                <input type="submit" class="btn btn-primary btn-user btn-block"
+                                    value="Register Account">
                                 <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
@@ -60,7 +65,7 @@
 
     </div>
 
-    
+
 
 </body>
 {% endblock content %}

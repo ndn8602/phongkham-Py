@@ -72,6 +72,10 @@ def getDoctors():
     doctors = dbDoctor.find()
     return doctors
 
+def updateDoctor():
+    doctors = dbDoctor.find()
+    return doctors
+
 #test
 
 # addNewDoctor()
