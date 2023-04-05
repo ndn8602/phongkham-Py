@@ -38,22 +38,60 @@ def adminDoctor():
     doctors = DAO.getDoctors()
     return render_template('admin/admin_doctor.html',title='Admin Doctor', doctors=doctors)
 
-@app.route('/admin/doctor/update', methods = ['POST'])
-def adminUpdateDoctor():
-    doctor_id = request.form['id']
-    name = request.form['name']
-    old = request.form['old']
-    gender = request.form['gender']
-    room = request.form['room']
-    phone = request.form['phone']
-    email = request.form['email']
-    degree = request.form['degree']
+@app.route('/admin/doctor/submit', methods = ['POST'])
+def doctorSubmitForm():
+    # print(request.form)
+    if request.method == 'POST':
+        if 'update' in request.form:
+            doctor_id = request.form['id']
+            name = request.form['name']
+            old = request.form['old']
+            gender = request.form['gender']
+            room = request.form['room']
+            phone = request.form['phone']
+            email = request.form['email']
+            degree = request.form['degree']
 
-    # DAO.updateDoctor(doctor_id,name,old)
-    print(name,old,doctor_id,gender,room,phone,email,degree)
+            DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree) 
+            # print(name,old,doctor_id,gender,room,phone,email,degree)
+        elif 'remove' in request.form:
+            doctor_id = request.form['id']
 
-    doctors = DAO.getDoctors()
-    return render_template('admin/admin_doctor.html',title='Admin Doctor', doctors=doctors)
+            # print(doctor_id)
+            DAO.deleteDoctor(doctor_id) 
+        return redirect("/admin/doctor")
+
+
+# @app.route('/admin/doctor/update', methods = ['POST'])
+# def adminUpdateDoctor():
+#     doctor_id = request.form['id']
+#     name = request.form['name']
+#     old = request.form['old']
+#     gender = request.form['gender']
+#     room = request.form['room']
+#     phone = request.form['phone']
+#     email = request.form['email']
+#     degree = request.form['degree']
+
+#     DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree) 
+
+#     return redirect("/admin/doctor")
+    # doctor={
+    #     "id":request.form['id'],
+    #     "name":request.form['name'],
+    #     "old":request.form['old'],
+    #     "gender":request.form['gender'],
+    #     "room":request.form['room'],
+    #     "phone":request.form['phone'],
+    #     "email":request.form['email'],
+    #     "degree":request.form['degree'],
+    # }
+
+    # DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree)
+    # print(name,old,doctor_id,gender,room,phone,email,degree)
+
+    # doctors = DAO.getDoctors()
+    # return redirect("/admin/doctor")
 
 
 @app.route('/admin/home')

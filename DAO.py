@@ -1,4 +1,5 @@
 import pymongo
+from bson.objectid import ObjectId
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["phongkham"]
@@ -72,9 +73,31 @@ def getDoctors():
     doctors = dbDoctor.find()
     return doctors
 
-def updateDoctor():
-    doctors = dbDoctor.find()
-    return doctors
+def updateDoctor(doctor_id,name,old,gender,room,phone,email,degree):
+    print(name,old,doctor_id,gender,room,phone,email,degree)
+    doctor_id = ObjectId(doctor_id)
+    filter = {"_id": doctor_id}    
+    update = {"$set": {
+        "name": name,
+        'old': old, 
+        'gender': gender, 
+        'room': room, 
+        'phone': phone, 
+        'email': email, 
+        'degree': degree, 
+    }}
+    result = dbDoctor.update_one(filter, update)
+    
+def deleteDoctor(doctor_id):
+    doctor_id = ObjectId(doctor_id)
+    result = dbDoctor.delete_one({'_id': doctor_id})
+
+# filter = {"_id": ObjectId("642a868784e4329e03ff4252")}    
+# update = {"$set": {
+#     "name": "XYZ",
+#     "old" : 20
+# }}
+# result = dbDoctor.update_one(filter, update)
 
 #test
 
