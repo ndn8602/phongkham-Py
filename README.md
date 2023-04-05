@@ -11,7 +11,7 @@
 1.  Mở project với vscode
 2.  Mở Terminal
 3.  Chạy script **activate** trong thư mục **venv/bin**
-4.  Cài các module **nltk torch flask** (**py -m pip install** \<package>)
+4.  Cài các module **nltk torch flask pymongo** (**py -m pip install** \<package>)
 5.  Chạy file main.py (**py main.py**)
 
 **Cấu trúc project và chỗ có thể mở rộng:**
