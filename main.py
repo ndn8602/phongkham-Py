@@ -42,6 +42,17 @@ def adminDoctor():
 def doctorSubmitForm():
     # print(request.form)
     if request.method == 'POST':
+        if 'add' in request.form:
+            name = request.form['name']
+            old = request.form['old']
+            gender = request.form['gender']
+            room = request.form['room']
+            phone = request.form['phone']
+            email = request.form['email']
+            degree = request.form['degree']
+
+            DAO.createDoctor(name,old,gender,room,phone,email,degree) 
+
         if 'update' in request.form:
             doctor_id = request.form['id']
             name = request.form['name']

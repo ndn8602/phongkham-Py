@@ -348,7 +348,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <button class="btn btn-success">Add</button>
+                    <button class="btn btn-success" id="btn-add_doctor" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Add</button>
                     <table class="table">
                         <thead>
                             <tr>
@@ -378,31 +379,7 @@
                             </tr>
                             {% endfor %}
                         </tbody>
-                        <script>
-                            const rows = document.querySelectorAll('.row-doctor');
-
-                            rows.forEach(row => {
-                                row.addEventListener('click', function (event) {
-                                    // Truy xuất thông tin về dòng được nhấp vào
-                                    console.dir(event.currentTarget);
-                                    currentDoctor = event.currentTarget
-                                    // console.dir(currentDoctor.children[1])
-
-                                    document.getElementById("infoDoctorId").value = currentDoctor.children[1].innerHTML
-                                    document.getElementById("infoDoctorName").value = currentDoctor.children[2].innerHTML
-                                    document.getElementById("infoDoctorOld").value = currentDoctor.children[3].innerHTML
-                                    document.getElementById("infoDoctorGender").value = currentDoctor.children[4].innerHTML
-                                    document.getElementById("infoDoctorRoom").value = currentDoctor.children[5].innerHTML
-                                    document.getElementById("infoDoctorPhone").value = currentDoctor.children[6].innerHTML
-                                    document.getElementById("infoDoctorEmail").value = currentDoctor.children[7].innerHTML
-                                    document.getElementById("infoDoctorDegree").value = currentDoctor.children[8].innerHTML
-
-                                });
-                            });
-                        </script>
                     </table>
-
-
                 </div>
                 <!-- /.container-fluid -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -426,10 +403,10 @@
                                         <input type="text" name="old" class="form-control" id="infoDoctorOld">
                                     </div>
                                     <div class="mb-3">
+                                        <label for="infoDoctorGender" class="form-label">Gender</label>
                                         <select class="form-select" name="gender" id="infoDoctorGender"
                                             aria-label="Default select example">
-                                            <option selected>Gender</option>
-                                            <option value="male">male</option>
+                                            <option selected value="male">male</option>
                                             <option value="female">female</option>
                                         </select>
                                     </div>
@@ -451,10 +428,12 @@
                                     </div>
                                     <input type="hidden" name="id" class="form-control" id="infoDoctorId">
 
-                                    <button type="submit" name="update" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Update</button>
-                                    <button type="submit" name="remove" class="btn btn-danger"
-                                        data-bs-dismiss="modal">Remove</button>
+                                    <span class="btn-store">
+                                        <button type="submit" name="update" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Update</button>
+                                        <button type="submit" name="remove" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Remove</button>
+                                    </span>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -521,6 +500,58 @@
     <!-- Page level custom scripts -->
     <script src="{{ url_for('static',filename='js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url_for('static',filename='js/demo/chart-pie-demo.js') }}"></script>
+    <script defer>
+        const btnAdd = `<button class="btn btn-success" name="add" data-bs-dismiss="modal">Add</button>`
+        const btnOrder = `
+                    <button type="submit" name="update" class="btn btn-primary"
+                        data-bs-dismiss="modal">Update</button>
+                    <button type="submit" name="remove" class="btn btn-danger"
+                        data-bs-dismiss="modal">Remove</button>
+                `
 
+
+        const rows = document.querySelectorAll('.row-doctor');
+
+        // onclick cho mỗi row
+        rows.forEach(row => {
+            row.addEventListener('click', function (event) {
+                // Truy xuất thông tin về dòng được nhấp vào
+                // console.dir(event.currentTarget);
+                currentDoctor = event.currentTarget
+                // console.dir(currentDoctor.children[1])
+
+                btnStore.innerHTML = btnOrder
+
+                //binding dữ liệu lên modal
+                document.getElementById("infoDoctorId").value = currentDoctor.children[1].innerHTML
+                document.getElementById("infoDoctorName").value = currentDoctor.children[2].innerHTML
+                document.getElementById("infoDoctorOld").value = currentDoctor.children[3].innerHTML
+                document.getElementById("infoDoctorGender").value = currentDoctor.children[4].innerHTML
+                document.getElementById("infoDoctorRoom").value = currentDoctor.children[5].innerHTML
+                document.getElementById("infoDoctorPhone").value = currentDoctor.children[6].innerHTML
+                document.getElementById("infoDoctorEmail").value = currentDoctor.children[7].innerHTML
+                document.getElementById("infoDoctorDegree").value = currentDoctor.children[8].innerHTML
+
+            });
+        });
+
+
+        const btnAddDoctor = document.getElementById('btn-add_doctor');
+        const btnStore = document.querySelector(".btn-store")
+
+        btnAddDoctor.addEventListener('click', function (event) {
+            currentDoctor = event.currentTarget.innerHTML + ""
+            console.dir(currentDoctor)
+            if (currentDoctor == "Add") {
+                btnStore.innerHTML = btnAdd
+            }
+            else {
+                btnStore.innerHTML = btnOrder
+            }
+        })
+    </script>
 </body>
+
+
+
 {% endblock content %}

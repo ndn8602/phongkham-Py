@@ -92,6 +92,17 @@ def deleteDoctor(doctor_id):
     doctor_id = ObjectId(doctor_id)
     result = dbDoctor.delete_one({'_id': doctor_id})
 
+def createDoctor(name,old,gender,room,phone,email,degree):
+    doctor={
+        'name': name,
+        'old': old,
+        'gender': gender,
+        'room': room,
+        'phone': phone,
+        'email': email,
+        'degree': degree,
+    }
+    dbDoctor.insert_one(doctor)
 # filter = {"_id": ObjectId("642a868784e4329e03ff4252")}    
 # update = {"$set": {
 #     "name": "XYZ",
