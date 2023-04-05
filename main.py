@@ -33,6 +33,11 @@ def register():
         return render_template('admin/register.html' ,title='Admin Register',error='true')
     return redirect("/admin")
 
+@app.route('/admin/doctor', methods = ['GET'])
+def adminDoctor():
+    doctors = DAO.getDoctors()
+    return render_template('admin/admin_doctor.html',title='Admin Doctor', doctors=doctors)
+
 @app.route('/admin/home')
 def adminHome():
     return render_template('admin/index.html',title='Admin Home')

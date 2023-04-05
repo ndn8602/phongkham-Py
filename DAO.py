@@ -68,8 +68,13 @@ def loginAdmin(email, password):
         return False
     return True
 
+def getDoctors():
+    doctors = dbDoctor.find()
+    return doctors
+
 #test
 
-addNewDoctor()
-addPatient()
+# addNewDoctor()
+# addPatient()
+# print(getDoctors())
 # addAdmin()
