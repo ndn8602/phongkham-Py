@@ -72,6 +72,28 @@ def doctorSubmitForm():
             DAO.deleteDoctor(doctor_id) 
         return redirect("/admin/doctor")
 
+@app.route('/admin/patient', methods = ['GET'])
+def adminPatient():
+    patients = DAO.getPatients()
+    return render_template('admin/admin_patient.html',title='Admin Doctor', patientss=patients)
+    #return redirect("/admin/home")
+@app.route('/admin/patient/submit', methods = ['POST'])
+def patientSubmitForm():
+    print(request.form)
+    if request.method == 'POST':
+        if 'add' in request.form:
+            patient = {
+                "name" : request.form['name'],
+                "old" : request.form['old'],
+                "gender" : request.form['gender'],
+                "room" : request.form['room'],
+                "phone" : request.form['phone'],
+            }
+            DAO.addPatient(patient)
+            #print(patient)
+        return redirect("/admin/patient")
+
+
 
 # @app.route('/admin/doctor/update', methods = ['POST'])
 # def adminUpdateDoctor():

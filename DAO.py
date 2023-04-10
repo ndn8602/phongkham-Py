@@ -50,9 +50,10 @@ def getDoctor():
 def deleteDoctor():
     pass
 
-def addPatient():
+def addPatient(patient):
     dbPatient.insert_one(patient)
-
+def getPatients():
+    pass
 def addAdmin(name, email, password):
     admin={
         'name': name,
