@@ -1,11 +1,9 @@
 from flask import Flask,render_template,request,jsonify
 from chat import get_response
 app = Flask(__name__)
-
 @app.route('/')
 def index():
     return render_template('user/index.html')
-
 @app.route('/admin/')
 def adminLogin():
     return render_template('admin/login.html' ,title='Admin Login')
@@ -22,7 +20,7 @@ def adminHome():
 def predict():
     text=request.get_json().get('message')
     response = get_response(text)
-    message = {"answer":response}
+    message = {"answer": response}
     return jsonify(message)
 
 if __name__ == "__main__":

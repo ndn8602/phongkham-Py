@@ -8,7 +8,7 @@ dbDoctor = mydb["doctor"]
 #create Chema
 
 
-#patient={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string} : All require
+#patient={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string,date:string} : All require
 #doctor={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string,degree:string,email:string {require:@},password:string} : All require
 #room={id:mongodb supported, nameroom:string} : All require
 
@@ -34,7 +34,6 @@ doctor={
 }
 
 #handle here
-
 def addNewDoctor():
     dbDoctor.insert_one(doctor)
 
@@ -46,7 +45,6 @@ def deleteDoctor():
 
 def addPatient():
     dbPatient.insert_one(patient)
-
 
 #test
 
