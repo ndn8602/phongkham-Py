@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from chat import get_response
 import DAO
+from datetime import datetime, timedelta
+import schedule
+import time
 
 app = Flask(__name__)
 
@@ -14,7 +17,6 @@ def index():
 def adminLogin():
     if request.method == 'GET':
         return render_template('admin/login.html', title='Admin Login')
-
     email = request.form['exampleInputEmail']
     password = request.form['exampleInputPassword']
 
@@ -55,9 +57,7 @@ def doctorSubmitForm():
             phone = request.form['phone']
             email = request.form['email']
             degree = request.form['degree']
-
             DAO.createDoctor(name, old, gender, room, phone, email, degree)
-
         if 'update' in request.form:
             doctor_id = request.form['id']
             name = request.form['name']
@@ -67,15 +67,50 @@ def doctorSubmitForm():
             phone = request.form['phone']
             email = request.form['email']
             degree = request.form['degree']
-
             DAO.updateDoctor(doctor_id, name, old, gender, room, phone, email, degree)
             # print(name,old,doctor_id,gender,room,phone,email,degree)
         elif 'remove' in request.form:
             doctor_id = request.form['id']
-
             # print(doctor_id)
             DAO.deleteDoctor(doctor_id)
         return redirect("/admin/doctor")
+
+
+@app.route('/admin/patient', methods=['GET'])
+def adminPatient():
+    patients = DAO.getPatients()
+    return render_template('admin/admin_patient.html', title='Admin Doctor', patientss=patients)
+    # return redirect("/admin/home")
+
+
+@app.route('/admin/patient/submit', methods=['POST'])
+def patientSubmitForm():
+    print(request.form)
+    if request.method == 'POST':
+        if 'add' in request.form:
+            patient = {
+                "name": request.form['name'],
+                "old": request.form['old'],
+                "gender": request.form['gender'],
+                "room": request.form['room'],
+                "phone": request.form['phone'],
+                "zip": request.form['zip']
+            }
+            DAO.addPatient(patient)
+            # print(patient)
+        return redirect("/admin/patient")
+
+def checkExpiredForms():
+    today = datetime.now().date()
+    for patient in DAO.getAllPatients():
+        zip_str = patient['zip']
+        zip_date = datetime.strptime(zip_str, '%Y-%m-%d').date()
+        if zip_date < today:
+            DAO.deletePatient(patient)
+
+
+# đặt lịch chạy hàm checkExpiredForms() mỗi ngày lúc 0 giờ
+schedule.every().day.at("00:00").do(checkExpiredForms)
 
 
 # @app.route('/admin/doctor/update', methods = ['POST'])
@@ -88,9 +123,7 @@ def doctorSubmitForm():
 #     phone = request.form['phone']
 #     email = request.form['email']
 #     degree = request.form['degree']
-
-#     DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree) 
-
+#     DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree)
 #     return redirect("/admin/doctor")
 # doctor={
 #     "id":request.form['id'],
@@ -102,14 +135,10 @@ def doctorSubmitForm():
 #     "email":request.form['email'],
 #     "degree":request.form['degree'],
 # }
-
 # DAO.updateDoctor(doctor_id,name,old,gender,room,phone,email,degree)
 # print(name,old,doctor_id,gender,room,phone,email,degree)
-
 # doctors = DAO.getDoctors()
 # return redirect("/admin/doctor")
-
-
 @app.route('/admin/home')
 def adminHome():
     return render_template('admin/index.html', title='Admin Home')
