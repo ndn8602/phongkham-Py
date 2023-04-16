@@ -10,7 +10,7 @@ dbAdmin = mydb["admin"]
 #create Chema
 
 
-#patient={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string} : All require
+#patient={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string,date:string} : All require
 #doctor={id:mongodb supported,name:string,old:number,gender:string,room:nameroom,phone:string,degree:string,email:string {require:@},password:string} : All require
 #room={id:mongodb supported, nameroom:string} : All require
 
@@ -53,21 +53,6 @@ def deleteDoctor():
 def addPatient():
     dbPatient.insert_one(patient)
 
-def addAdmin(name, email, password):
-    admin={
-        'name': name,
-        'email': email,
-        'password': password, # can use bcrypto to hash password
-    }
-    if dbAdmin.count_documents({'email': email}) != 0:
-        return False
-    dbAdmin.insert_one(admin)
-    return True
-
-def loginAdmin(email, password):
-    if dbAdmin.count_documents({'email': email, 'password': password}) == 0:
-        return False
-    return True
 
 def getDoctors():
     doctors = dbDoctor.find()
