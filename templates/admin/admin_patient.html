@@ -40,7 +40,7 @@
             <!-- data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo" -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/home/doctor">
+                <a class="nav-link collapsed" href="/admin/doctor">
                     <i class="fa fa-user-md" aria-hidden="true"></i>
                     <span>Doctor</span>
                 </a>
@@ -57,7 +57,7 @@
             <!-- data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities" -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/home/patient">
+                <a class="nav-link collapsed" href="/admin/patient">
                     <i class="fa fa-wheelchair" aria-hidden="true"></i>
                     <span>Patient</span>
                 </a>
@@ -350,33 +350,31 @@
                 <form method="POST" action="/admin/patient/submit">
                     <div class="info1">
                         <div class="addpatient-1 patient">
-                           <label for="infoPatientName" class="form-label">Full Name</label>
-                           <input type="text" name="name"  id="infoPatientName" size="40%"
-                                            aria-describedby="emailHelp">
+                            <label for="infoPatientName" class="form-label">Full Name</label>
+                            <input type="text" name="name" id="infoPatientName" size="40%" aria-describedby="emailHelp">
                         </div>
                         <div class="addpatient-3 patient">
-                           <label for="infoPatientGender" class="form-label">Gender</label>
-                           <select name="gender" id="infoPatientGender"
-                                aria-label="Default select example">
-                            <option selected value="male">male</option>
-                            <option value="female">female</option>
-                           </select>
+                            <label for="infoPatientGender" class="form-label">Gender</label>
+                            <select name="gender" id="infoPatientGender" aria-label="Default select example">
+                                <option selected value="male">male</option>
+                                <option value="female">female</option>
+                            </select>
                         </div>
                     </div>
                     <div class="info2">
                         <div class="addpatient-4 patient">
-                        <label for="infoPatientRoom" class="form-label room">Room</label>
-                        <input type="text" name="room"  id="infoPatientRoom" size="40%">
+                            <label for="infoPatientRoom" class="form-label room">Room</label>
+                            <input type="text" name="room" id="infoPatientRoom" size="40%">
                         </div>
                         <div class="addpatient-2 patient">
-                        <label for="infoPatientOld" class="form-label old">Old</label>
-                        <input type="text" name="old" id="infoPatientOld">
+                            <label for="infoPatientOld" class="form-label old">Old</label>
+                            <input type="text" name="old" id="infoPatientOld">
                         </div>
                     </div>
 
                     <div class="addpatient-5 patient">
                         <label for="infoPatientPhone" class="form-label phone">Phone</label>
-                        <input type="text" name="phone"  id="infoPatientPhone" maxlength="10">
+                        <input type="text" name="phone" id="infoPatientPhone" maxlength="10">
                     </div>
                     <input type="hidden" name="id" class="form-control" id="infoPatientId">
                     <span class="btn-store">
@@ -384,7 +382,7 @@
                     </span>
                 </form>
             </div>
-                <!-- /.container-fluid -->
+            <!-- /.container-fluid -->
 
             <!-- End of Main Content -->
 

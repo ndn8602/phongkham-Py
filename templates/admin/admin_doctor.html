@@ -40,7 +40,7 @@
             <!-- data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo" -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/home/doctor">
+                <a class="nav-link collapsed" href="/admin/doctor">
                     <i class="fa fa-user-md" aria-hidden="true"></i>
                     <span>Doctor</span>
                 </a>
@@ -57,7 +57,7 @@
             <!-- data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities" -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/home/patient">
+                <a class="nav-link collapsed" href="/admin/patient">
                     <i class="fa fa-wheelchair" aria-hidden="true"></i>
                     <span>Patient</span>
                 </a>
@@ -501,7 +501,7 @@
     <script src="{{ url_for('static',filename='js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url_for('static',filename='js/demo/chart-pie-demo.js') }}"></script>
     <script defer>
-const btnOrder = `
+        const btnOrder = `
                     <button type="submit" name="update" class="btn btn-primary"
                         data-bs-dismiss="modal">Update</button>
                     <button type="submit" name="remove" class="btn btn-danger"
