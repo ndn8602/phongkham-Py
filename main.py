@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('user/index.html')
 
-@app.route('/admin/')
+@app.route('/admin/',methods = ['POST', 'GET'])
 def adminLogin():
     if request.method == 'GET':
         return render_template('admin/login.html' ,title='Admin Login')
@@ -30,7 +30,7 @@ def register():
     
     if DAO.addAdmin(name, email, password) == False:
         return render_template('admin/register.html' ,title='Admin Register',error='true')
-    return redirect("/admin")
+    return redirect("/admin/")
 
 @app.route('/admin/doctor', methods = ['GET'])
 def adminDoctor():
