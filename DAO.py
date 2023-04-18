@@ -50,7 +50,7 @@ def getDoctor():
 def deleteDoctor():
     pass
 
-def addPatient():
+def addPatient(patient):
     dbPatient.insert_one(patient)
 
 def addAdmin(name, email, password):
@@ -72,6 +72,8 @@ def loginAdmin(email, password):
 def getDoctors():
     doctors = dbDoctor.find()
     return doctors
+def getPatients():
+    pass
 
 def updateDoctor(doctor_id,name,old,gender,room,phone,email,degree):
     print(name,old,doctor_id,gender,room,phone,email,degree)

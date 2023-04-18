@@ -76,29 +76,48 @@ def doctorSubmitForm():
         return redirect("/admin/doctor")
 
 
-@app.route('/admin/patient', methods=['GET'])
+"""@app.route('/admin/patient', methods=['GET'])
 def adminPatient():
     patients = DAO.getPatients()
     return render_template('admin/admin_patient.html', title='Admin Doctor', patientss=patients)
     # return redirect("/admin/home")
-
-
-@app.route('/admin/patient/submit', methods=['POST'])
+"""
 def patientSubmitForm():
-    print(request.form)
+    patient = {
+        "name" : request.form['name'],
+        "old" : request.form['old'],
+        "gender" : request.form['gender'],
+        "room" : request.form['room'],
+        "phone" : request.form['phone']
+    }
+    DAO.addPatient(patient)
+@app.route('/admin/patient', methods = ['GET','POST'])
+def adminPatient():
+    print(request.method)
+    if request.method == 'GET':
+       patients = DAO.getPatients()
+       return render_template('admin/admin_patient.html',title='Admin Doctor', patientss=patients)
     if request.method == 'POST':
-        if 'add' in request.form:
-            patient = {
-                "name": request.form['name'],
-                "old": request.form['old'],
-                "gender": request.form['gender'],
-                "room": request.form['room'],
-                "phone": request.form['phone'],
-                "zip": request.form['zip']
-            }
-            DAO.addPatient(patient)
-            # print(patient)
+        #print("vao")
+        patientSubmitForm()
         return redirect("/admin/patient")
+
+@app.route('/schedule', methods = ['GET','POST'])
+def Schedule():
+    print(request.method)
+    if request.method == 'GET':
+       return render_template('admin/admin_patient.html',title='Admin Doctor')
+    else:
+        patient = {
+            "name": request.form['name'],
+            "email": request.form['email'],
+            "address": request.form['address'],
+            "date": request.form['date']
+        }
+        print(patient)
+        # patientSubmitForm()
+        return redirect("/")
+
 
 def checkExpiredForms():
     today = datetime.now().date()
@@ -107,10 +126,6 @@ def checkExpiredForms():
         zip_date = datetime.strptime(zip_str, '%Y-%m-%d').date()
         if zip_date < today:
             DAO.deletePatient(patient)
-
-
-# đặt lịch chạy hàm checkExpiredForms() mỗi ngày lúc 0 giờ
-schedule.every().day.at("00:00").do(checkExpiredForms)
 
 
 # @app.route('/admin/doctor/update', methods = ['POST'])
