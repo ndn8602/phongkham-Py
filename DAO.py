@@ -69,11 +69,11 @@ def loginAdmin(email, password):
     if dbAdmin.count_documents({'email': email, 'password': password}) == 0:
         return False
     return True
-
+# --- [DOCTOR] ----
 def getDoctors():
     doctors = dbDoctor.find()
     return doctors
-
+ 
 def updateDoctor(doctor_id,name,old,gender,room,phone,email,degree):
     print(name,old,doctor_id,gender,room,phone,email,degree)
     doctor_id = ObjectId(doctor_id)
@@ -89,6 +89,8 @@ def updateDoctor(doctor_id,name,old,gender,room,phone,email,degree):
     }}
     result = dbDoctor.update_one(filter, update)
     
+ 
+
 def deleteDoctor(doctor_id):
     doctor_id = ObjectId(doctor_id)
     result = dbDoctor.delete_one({'_id': doctor_id})
@@ -104,16 +106,40 @@ def createDoctor(name,old,gender,room,phone,email,degree):
         'degree': degree,
     }
     dbDoctor.insert_one(doctor)
-# filter = {"_id": ObjectId("642a868784e4329e03ff4252")}    
-# update = {"$set": {
-#     "name": "XYZ",
-#     "old" : 20
-# }}
-# result = dbDoctor.update_one(filter, update)
 
-#test
+# --- [PATIENT] ----
 
-# addNewDoctor()
-# addPatient()
-# print(getDoctors())
-# addAdmin()
+def getPatients():
+    petient = dbPatient.find()
+    return petient
+
+
+def createPateint(pateint):
+    dbPatient.insert_one(pateint)
+
+ 
+def updatePatient(patient_id,patient):
+    print("dao.update")
+    print(patient_id,patient)
+    patient_id = ObjectId(patient_id)
+    filter = {"_id": patient_id}    
+    update = {"$set": {
+        "name":patient['name'],
+        "gender": patient['gender'],
+        "room": patient['room'],
+        "phone": patient['phone'],
+        "email":patient['email'],
+        "address":patient['address'],
+        "date":patient['date'],
+    }}
+    print(update)
+    result=dbPatient.update_one(filter, update)
+    print(result.modified_count)
+    
+ 
+
+
+def deletePatiet(pateint_id):
+    print("dao.delete")
+    pateint_id = ObjectId(pateint_id)
+    dbPatient.delete_one({'_id': pateint_id})

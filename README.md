@@ -15,3 +15,7 @@
 5.  Chạy file main.py (**py main.py**)
 
 **Cấu trúc project và chỗ có thể mở rộng:**
+
+
+** AI
+1. cd venv & tải torch # pip3 install torch
