@@ -12,10 +12,6 @@
 2.  Mở Terminal
 3.  Chạy script **activate** trong thư mục **venv/bin**
 4.  Cài các module **nltk torch flask pymongo schedule** (**py -m pip install** \<package>)
-5.  Chạy file main.py (**py main.py**)
-
-**Cấu trúc project và chỗ có thể mở rộng:**
-
-
-** AI
-1. cd venv & tải torch # pip3 install torch
+5.  Chạy python bằng dòng lệnh
+6.  Import nltk và dùng nltk để tải module "punkt" (nltk.download('punkt'))
+7.  Chạy file main.py (**py main.py**)
